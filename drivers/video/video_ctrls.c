@@ -624,7 +624,8 @@ void video_print_ctrl(const struct video_ctrl_query *const cq)
 		type = "string";
 		break;
 	default:
-		break;
+		LOG_ERR("Unknown control type %u", cq->type);
+		return;
 	}
 	snprintf(buf, sizeof(buf), "(%s)", type);
 
@@ -642,7 +643,7 @@ void video_print_ctrl(const struct video_ctrl_query *const cq)
 	} else {
 		LOG_INF("%32s 0x%08x %-10s (flags=0x%02x) : min=%d max=%d step=%d default=%d "
 			"value=%d ",
-			cq->name, cq->id, buf, cq->flags, cq->range.min, cq->range.max,
+			cq->name ? cq->name : "null", cq->id, typebuf, cq->flags, cq->range.min, cq->range.max,
 			cq->range.step, cq->range.def, vc.val);
 	}
 

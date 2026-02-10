@@ -842,6 +842,7 @@ static int sdhc_spi_init(const struct device *dev)
 	data->power_mode = SDHC_POWER_OFF;
 	data->spi_cfg = &data->cfg_a;
 	data->spi_cfg->frequency = 0;
+	LOG_INF("SDHC SPI initialized");
 	return ret;
 }
 

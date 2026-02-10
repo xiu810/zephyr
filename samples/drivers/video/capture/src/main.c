@@ -13,13 +13,17 @@
 #include <zephyr/drivers/video-controls.h>
 
 #include <zephyr/logging/log.h>
-LOG_MODULE_REGISTER(main, CONFIG_LOG_DEFAULT_LEVEL);
 
 #if !DT_HAS_CHOSEN(zephyr_camera)
 #error No camera chosen in devicetree. Missing "--shield" or "--snippet video-sw-generator" flag?
 #endif
 
-static inline int app_setup_display(const struct device *const display_dev, const uint32_t pixfmt)
+LOG_MODULE_REGISTER(main);
+
+#define VIDEO_DEV_SW "VIDEO_SW_GENERATOR"
+
+#if DT_HAS_CHOSEN(zephyr_display)
+static inline int display_setup(const struct device *const display_dev, const uint32_t pixfmt)
 {
 	struct display_capabilities capabilities;
 	int ret = 0;

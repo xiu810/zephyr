@@ -77,3 +77,19 @@
 		spi-max-frequency = <20000000>;
 	};
 };
+
+&esp32_bt_hci {
+	status = "okay";
+};
+
+/ {
+	soc {
+		wifi@1 {
+    		compatible = "espressif,esp32-wifi";
+    		status = "okay";
+    		label = "ESP32_WIFI_AP_STA";
+			reg = <0x3ffae600 0x600>;
+		};
+	};
+};
+

@@ -9,6 +9,8 @@
 #include <zephyr/net/wifi_mgmt.h>
 #include <zephyr/net/dhcpv4_server.h>
 
+#define LOG_LEVEL LOG_LEVEL_DBG
+
 LOG_MODULE_REGISTER(MAIN);
 
 #define MACSTR "%02X:%02X:%02X:%02X:%02X:%02X"
@@ -17,6 +19,16 @@ LOG_MODULE_REGISTER(MAIN);
 	(NET_EVENT_WIFI_CONNECT_RESULT | NET_EVENT_WIFI_DISCONNECT_RESULT |                        \
 	 NET_EVENT_WIFI_AP_ENABLE_RESULT | NET_EVENT_WIFI_AP_DISABLE_RESULT |                      \
 	 NET_EVENT_WIFI_AP_STA_CONNECTED | NET_EVENT_WIFI_AP_STA_DISCONNECTED)
+
+/* AP Mode Configuration */
+#define WIFI_AP_SSID       "ESP32-AP"
+#define WIFI_AP_PSK        ""
+#define WIFI_AP_IP_ADDRESS "192.168.4.1"
+#define WIFI_AP_NETMASK    "255.255.255.0"
+
+/* STA Mode Configuration */
+#define WIFI_SSID "innostar-office"     /* Replace `SSID` with WiFi ssid. */
+#define WIFI_PSK  "INst@2021" /* Replace `PASSWORD` with Router password. */
 
 static struct net_if *ap_iface;
 static struct net_if *sta_iface;

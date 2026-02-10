@@ -294,6 +294,11 @@ static int video_esp32_enqueue(const struct device *dev, struct video_buffer *vb
 {
 	struct video_esp32_data *data = dev->data;
 
+	if (ep != VIDEO_EP_OUT) {
+		return -EINVAL;
+	}
+
+	vbuf->timestamp = k_uptime_get_32();
 	vbuf->bytesused = data->video_format.pitch * data->video_format.height;
 	vbuf->line_offset = 0;
 
